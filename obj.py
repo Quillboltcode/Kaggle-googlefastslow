@@ -1,29 +1,20 @@
-import sqlite3
+import random
 
-class News:
-    def __init__(self) -> None:# contruct php
-        self.name = "News"
-        self.image = "news.png"
+# Initialize a sorted sequence
+sorted_sequence = sorted([random.randint(1, 100) for _ in range(10)])
+print(f"Initial sorted sequence: {sorted_sequence}")
 
+# Insert a sequence of random integers
+for _ in range(5):
+    insert_pos = random.randint(0, len(sorted_sequence))
+    print(insert_pos)
+    sorted_sequence.insert(insert_pos, random.randint(1, 100))
+sorted_sequence.sort()
+print(f"After inserting random integers: {sorted_sequence}")
 
-
-array_of_news = [News(),News(),News()]
-
-def get_news(id):
-    # return $array_of_news[id]
-    return array_of_news[id]
-
-def get_news_from_db():
-    db = sqlite3.connect('news.db')
-    # get data from database 
-    cursor = db.cursor()
-    cursor.execute("SELECT * FROM news limit 3")
-    data = cursor.fetchall()
-
-    for i in range(len(data)):
-        array_of_news[i].name = data[i][1]
-        array_of_news[i].image = data[i][2]
-
-def get_next_news(id):
-    return array_of_news[(id+1)
-                         ]
+# Remove elements as determined by a random sequence of positions
+positions = sorted(random.sample(range(len(sorted_sequence)), 5), reverse=True)
+print(positions)
+for pos in positions:
+    del sorted_sequence[pos]
+print(f"After removing elements at random positions: {sorted_sequence}")
